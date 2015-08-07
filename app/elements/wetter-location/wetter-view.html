@@ -1,0 +1,39 @@
+<dom-module id="wetter-view">
+  <style>
+    :host {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+    }
+  </style>
+  <template>
+    <iron-ajax
+      id="weatherajax"
+      auto
+      url="[[url]]"
+      handle-as="json"
+      last-response="{{weatherdata}}"
+      debounce-duration="300">
+    </iron-ajax>
+
+    <template is="dom-repeat" items="[[weatherdata}}">
+      <paper-material elevation="1">
+        <wetter-location weatherdata="[[item]]"></wetter-location>
+      </paper-material>
+    </template>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'wetter-view',
+      properties: {
+        url: String
+      }
+
+
+    });
+  })();
+</script>
+

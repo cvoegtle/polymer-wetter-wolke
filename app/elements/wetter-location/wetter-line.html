@@ -1,0 +1,23 @@
+<dom-module id="wetter-line">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <span class="paper-font-body2">[[label]]</span> <span class="paper-font-body2">[[data]]</span><br/>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'wetter-line',
+
+      properties: {
+        label: String,
+        data: Number
+      }
+    });
+  })();
+</script>
+

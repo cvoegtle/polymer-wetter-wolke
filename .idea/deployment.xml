@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="www.voegtle-clan.de" overwriteAll="false">
+    <serverData>
+      <paths name="www.voegtle-clan.de">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/~christian/ww/app" local="$PROJECT_DIR$/dist" web="/~christian/ww/app" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

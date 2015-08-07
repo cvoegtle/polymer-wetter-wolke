@@ -1,0 +1,55 @@
+<dom-module id="wetter-location">
+  <style>
+    :host {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+    }
+  </style>
+  <template>
+    <h2>
+      <span>[[weatherdata.location]]</span>
+      <span>[[timeFraction(weatherdata.timestamp)]]</span>
+    </h2>
+    <wetter-line label="Temperatur:" data="[[format(weatherdata.temperature,'°C')]]"></wetter-line>
+    <wetter-line label="Luftfeuchtigkeit:" data="[[format(weatherdata.humidity, '%')]]"></wetter-line>
+    <template is="dom-if" if="[[weatherdata.rain]]">
+      <wetter-line label=" Regen letzte Stunde:" data="[[format(weatherdata.rain, 'l')]]"></wetter-line>
+    </template>
+    <template is="dom-if" if="[[weatherdata.rain_today]]">
+      <wetter-line label="Regen:" data="[[format(weatherdata.rain_today, 'l')]]"></wetter-line>
+    </template>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'wetter-location',
+
+      properties: {
+        weatherdata: Object
+      },
+
+      format: function (value, unit) {
+        if (value !== '') {
+          var result = value.toFixed(1);
+          return result.replace('.', ',') + ' ' + unit;
+
+        } else {
+          return '';
+        }
+      },
+
+      timeFraction: function (dateAsString) {
+        var date = new Date(dateAsString);
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+
+        return hours + ':' + (minutes < 10 ? '0' + minutes : minutes);
+      }
+
+    });
+  })();
+</script>
+
