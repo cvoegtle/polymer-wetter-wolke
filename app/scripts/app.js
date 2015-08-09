@@ -31,7 +31,10 @@
     // imports are loaded and elements have been registered
   });
 
-  // Close drawer after menu item is selected if drawerPanel is narrow
+  app.doRefresh = function () {
+    app.weatherurl = 'http://wettercentral.appspot.com/weatherstation/read?locations=tegelweg8,bali,leoxity,forstweg17,ochsengasse,herzo&utf8&ext&' + new Date();
+  };
+
   app.onMenuSelect = function () {
     var drawerPanel = document.querySelector('#paperDrawerPanel');
     if (drawerPanel.narrow) {
@@ -39,10 +42,10 @@
     }
   };
 
-  app.route = 'home';
-  app.weatherurl = 'http://wettercentral.appspot.com/weatherstation/read?locations=tegelweg8,bali,leoxity,forstweg17,ochsengasse,herzo&utf8&ext';
-  app.doRefresh = function () {
-    app.weatherurl = 'http://wettercentral.appspot.com/weatherstation/read?locations=tegelweg8,bali,leoxity,forstweg17,ochsengasse,herzo&utf8&ext&' + new Date();
+  app.goHome = function () {
+    app.route = 'home';
   };
 
+  app.goHome();
+  app.weatherurl = 'http://wettercentral.appspot.com/weatherstation/read?locations=tegelweg8,bali,leoxity,forstweg17,ochsengasse,herzo&utf8&ext';
 })(document);

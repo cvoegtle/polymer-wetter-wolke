@@ -64,7 +64,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <!-- Drawer Toolbar -->
       <paper-toolbar id="drawerToolbar">
-        <paper-icon-button src="images/wetterlogo.png" class=""/>
+        <paper-icon-button src="images/wetterlogo.png" on-tap="goHome"/>
       </paper-toolbar>
 
       <!-- Drawer Content -->
@@ -92,12 +92,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <paper-icon-button id="refreshbutton" icon="refresh" on-tap="doRefresh"></paper-icon-button>
 
         <!-- Application name -->
-        <div class=" middle paper-font-display2 app-name
-        ">Wetter Wolke
+        <div class="middle middle-container center horizontal layout">
+          <div class="app-name">Wetter Wolke</div>
         </div>
 
         <!-- Application sub title -->
-        <div class="bottom title"></div>
+        <div class="bottom bottom-container center horizontal layout">
+          <div class="bottom title">Wetterdaten direkt vom Erzeuger</div>
+        </div>
 
       </paper-toolbar>
 
@@ -121,9 +123,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </section>
           <section data-route="settings">
             <paper-material elevation="1">
-              <h2 class="paper-font-display2">Settings</h2>
+              <h2 class="paper-font-display2">Einstellungen</h2>
+              <iron-ajax
+                auto
+                url="settings.json"
+                handle-as="json"
+                last-response="{{settings}}"
+                debounce-duration="300">
+              </iron-ajax>
 
-              <p>Meine Einstellungen</p>
+              <template is="dom-repeat" items="{{settings.weatherstations}}">
+                <p>
+                  <paper-checkbox id="[[item.id]]" checked="{{item.visible}}">[[item.location]]</paper-checkbox>
+                </p>
+              </template>
             </paper-material>
           </section>
 

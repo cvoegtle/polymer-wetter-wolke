@@ -1,0 +1,34 @@
+{
+  "weatherstations": [
+    {
+      "id": "tegelweg8",
+      "location": "Paderborn",
+      "visible": true
+    },
+    {
+      "id": "bali",
+      "location": "Bad Lippspringe",
+      "visible": true
+    },
+    {
+      "id": "leoxity",
+      "location": "Leopoldshöhe",
+      "visible": true
+    },
+    {
+      "id": "forstweg17",
+      "location": "Bonn",
+      "visible": false
+    },
+    {
+      "id": "ochsengasse",
+      "location": "Freiburg",
+      "visible": true
+    },
+    {
+      "id": "herzo",
+      "location": "Herzogenaurach",
+      "visible": true
+    }
+  ]
+}
