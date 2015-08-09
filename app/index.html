@@ -59,6 +59,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body unresolved class="fullbleed layout vertical">
 <span id="browser-sync-binding"></span>
 <template is="dom-bind" id="app">
+  <iron-localstorage name="setting-store"
+                     value="{{settings}}"
+                     on-iron-localstorage-load-empty="initializeSettings">
+  </iron-localstorage>
 
   <paper-drawer-panel id="paperDrawerPanel">
     <!-- Drawer Scroll Header Panel -->
@@ -128,13 +132,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <section data-route="settings">
             <paper-material elevation="1">
               <h2 class="paper-font-display2">Einstellungen</h2>
-              <iron-ajax
-                auto
-                url="settings.json"
-                handle-as="json"
-                last-response="{{settings}}"
-                debounce-duration="300">
-              </iron-ajax>
 
               <template is="dom-repeat" items="{{settings.weatherstations}}">
                 <p>

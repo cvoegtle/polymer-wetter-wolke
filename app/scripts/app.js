@@ -15,6 +15,9 @@
   // and give it some initial binding values
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
+  app.properties = {
+    settings: Object
+  };
 
   app.displayInstalledToast = function () {
     document.querySelector('#caching-complete').show();
@@ -28,7 +31,8 @@
 
   // See https://github.com/Polymer/polymer/issues/1381
   window.addEventListener('WebComponentsReady', function () {
-    // imports are loaded and elements have been registered
+    app.goHome();
+    app.doRefresh();
   });
 
   // Main area's paper-scroll-header-panel custom condensing transformation of
@@ -64,14 +68,69 @@
     }
   };
 
+  app.initializeSettings = function () {
+    app.settings = {
+      weatherstations: [
+        {
+          id: 'tegelweg8',
+          location: 'Paderborn',
+          visible: true
+        },
+        {
+          id: 'bali',
+          location: 'Bad Lippspringe',
+          visible: true
+        },
+        {
+          id: 'leoxity',
+          location: 'Leopoldshöhe',
+          visible: true
+        },
+        {
+          id: 'forstweg17',
+          location: 'Bonn',
+          visible: false
+        },
+        {
+          id: 'ochsengasse',
+          location: 'Freiburg',
+          visible: true
+        },
+        {
+          id: 'herzo',
+          location: 'Herzogenaurach',
+          visible: true
+        }
+      ]
+    };
+  };
+
+
   app.goHome = function () {
     app.route = 'home';
   };
 
-  app.doRefresh = function () {
-    app.weatherurl = 'http://wettercentral.appspot.com/weatherstation/read?locations=tegelweg8,bali,leoxity,forstweg17,ochsengasse,herzo&utf8&ext&' + new Date();
+  app.buildUrl = function () {
+    var url = 'http://wettercentral.appspot.com/weatherstation/read?utf8&ext&locations=';
+    var stations = app.settings.weatherstations;
+    var first = true;
+    for (var i in stations) {
+      if (stations[i].visible) {
+        if (!first) {
+          url += ',';
+        }
+        first = false;
+        url += stations[i].id;
+      }
+    }
+    url += '&' + new Date();
+    return url;
   };
 
-  app.goHome();
-  app.doRefresh();
-})(document);
+  app.doRefresh = function () {
+    app.weatherurl = app.buildUrl();
+//    app.weatherurl = 'http://wettercentral.appspot.com/weatherstation/read?locations=tegelweg8,bali,leoxity,forstweg17,ochsengasse,herzo&utf8&ext&' + new Date();
+  };
+
+})
+(document);
