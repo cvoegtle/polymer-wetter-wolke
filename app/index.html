@@ -59,10 +59,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body unresolved class="fullbleed layout vertical">
 <span id="browser-sync-binding"></span>
 <template is="dom-bind" id="app">
-  <iron-localstorage name="setting-store"
-                     value="{{settings}}"
-                     on-iron-localstorage-load-empty="initializeSettings">
-  </iron-localstorage>
 
   <paper-drawer-panel id="paperDrawerPanel">
     <!-- Drawer Scroll Header Panel -->
@@ -75,12 +71,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <!-- Drawer Content -->
       <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
-        <a data-route="home" href="#!/home">
+        <a data-route="home" onclick="app.doRefresh()">
           <iron-icon icon="home"></iron-icon>
           <span>Wetter</span>
         </a>
 
-        <a data-route="settings" href="#!/settings">
+        <a data-route="settings">
           <iron-icon icon="settings"></iron-icon>
           <span>Einstellungen</span>
         </a>
@@ -97,7 +93,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <span class="flex"></span>
 
         <!-- Toolbar icons -->
-        <paper-icon-button id="refreshbutton" icon="refresh" on-tap="doRefresh"></paper-icon-button>
+        <paper-icon-button id="refreshbutton" icon="refresh" on-tap="goHome"></paper-icon-button>
 
         <!-- Application name -->
         <div class="middle middle-container center horizontal layout">
@@ -132,6 +128,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <section data-route="settings">
             <paper-material elevation="1">
               <h2 class="paper-font-display2">Einstellungen</h2>
+              <iron-localstorage name="setting-store"
+                                 value="{{settings}}"
+                                 on-iron-localstorage-load-empty="initializeSettings">
+              </iron-localstorage>
 
               <template is="dom-repeat" items="{{settings.weatherstations}}">
                 <p>

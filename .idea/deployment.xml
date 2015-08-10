@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="www.voegtle-clan.de" overwriteAll="false">
+  <component name="PublishConfigData" serverName="www.voegtle-clan.de" overwriteAll="false" deleteMissingItems="true">
     <serverData>
       <paths name="www.voegtle-clan.de">
         <serverdata>
