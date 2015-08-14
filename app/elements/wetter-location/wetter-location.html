@@ -2,16 +2,15 @@
   <style>
     :host {
       display: block;
+      --wetter-caption-color: black;
     }
 
     @media (max-width: 600px) {
     }
   </style>
   <template>
-    <h2>
-      <span>[[weatherdata.location]]</span>
-      <span>[[timeFraction(weatherdata.timestamp)]]</span>
-    </h2>
+    <wetter-caption location="[[weatherdata.location]]"
+                    timestamp="[[timeFraction(weatherdata.timestamp)]]"></wetter-caption>
     <wetter-line label="Temperatur:" data="[[format(weatherdata.temperature,'°C')]]"></wetter-line>
     <wetter-line label="Luftfeuchtigkeit:" data="[[format(weatherdata.humidity, '%')]]"></wetter-line>
     <template is="dom-if" if="[[weatherdata.rain]]">
@@ -43,11 +42,16 @@
 
       timeFraction: function (dateAsString) {
         var date = new Date(dateAsString);
+
+        var age = (new Date().getTime() - date.getTime()) / 1000 / 60;
+        this.customStyle['--wetter-caption-color'] = (age < 20 ? 'black' : 'red');
+        this.updateStyles();
+
         var hours = date.getHours();
         var minutes = date.getMinutes();
 
         return hours + ':' + (minutes < 10 ? '0' + minutes : minutes);
-      }
+      },
 
     });
   })();

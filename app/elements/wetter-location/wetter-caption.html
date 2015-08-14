@@ -1,0 +1,30 @@
+<dom-module id="wetter-caption">
+  <style>
+    .caption {
+      color: var(--wetter-caption-color);
+    }
+
+    .timestamp {
+      font-size: 10pt;
+    }
+  </style>
+  <template>
+    <h2 class="caption">
+      <span>[[location]]</span>
+      <span class="timestamp">[[timestamp]]</span>
+    </h2>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'wetter-caption',
+
+      properties: {
+        location: String,
+        timestamp: String
+      }
+    });
+  })();
+</script>
+
