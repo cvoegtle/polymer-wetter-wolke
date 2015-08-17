@@ -10,7 +10,7 @@
   </style>
   <template>
     <wetter-caption location="[[weatherdata.location]]"
-                    timestamp="[[timeFraction(weatherdata.timestamp)]]"></wetter-caption>
+                    timestamp="[[timeFraction(weatherdata.timestamp)]]" expanded="false"></wetter-caption>
     <wetter-line label="Temperatur:" data="[[format(weatherdata.temperature,'°C')]]"></wetter-line>
     <wetter-line label="Luftfeuchtigkeit:" data="[[format(weatherdata.humidity, '%')]]"></wetter-line>
     <template is="dom-if" if="[[weatherdata.rain]]">
@@ -18,6 +18,9 @@
     </template>
     <template is="dom-if" if="[[weatherdata.rain_today]]">
       <wetter-line label="Regen:" data="[[format(weatherdata.rain_today, 'l')]]"></wetter-line>
+    </template>
+    <template is="dom-if" if="[[weatherdata.watt]]">
+      <wetter-line label="Solarleistung:" data="[[format(weatherdata.watt, 'W')]]"></wetter-line>
     </template>
   </template>
 </dom-module>
@@ -51,7 +54,7 @@
         var minutes = date.getMinutes();
 
         return hours + ':' + (minutes < 10 ? '0' + minutes : minutes);
-      },
+      }
 
     });
   })();
