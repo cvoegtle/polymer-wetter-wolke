@@ -31,7 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Polymer Starter Kit">
+  <meta name="application-name" content="Wetter Wolke">
   <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
 
   <!-- Add to homescreen for Safari on iOS -->
@@ -75,7 +75,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <iron-icon icon="home"></iron-icon>
           <span>Wetter</span>
         </a>
-
+        <a data-route="map">
+          <iron-icon icon="maps:map"></iron-icon>
+          <span>Karte</span>
+        </a>
         <a data-route="settings">
           <iron-icon icon="settings"></iron-icon>
           <span>Einstellungen</span>
@@ -124,6 +127,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <wetter-location weatherdata="[[item]]"></wetter-location>
               </paper-material>
             </template>
+          </section>
+          <section data-route="map">
+            <google-map latitude="50.769753" longitude="8.103826" zoom="6">
+              <google-map-marker latitude="51.7238851" longitude="8.7589337"><object data="https://tegelwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+              <google-map-marker latitude="51.775263" longitude="8.810188"><object data="https://baliwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+              <google-map-marker latitude="52.014573" longitude="8.695692"><object data="https://leo-wetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+              <google-map-marker latitude="50.6537912" longitude="7.1126256"><object data="https://forstwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+              <google-map-marker latitude="48.023870" longitude="7.862207"><object data="https://oxenwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+              <google-map-marker latitude="49.5692083" longitude="10.8833075"><object data="https://herzowetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+            </google-map>
           </section>
           <section data-route="settings">
             <paper-material elevation="1">

@@ -12,3 +12,12 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
 }
+
+google-map {
+  position: static;
+}
+
+.mapinfo {
+  height: 110px;
+  width: 210px;
+}
