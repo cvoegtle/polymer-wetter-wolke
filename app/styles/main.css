@@ -14,7 +14,7 @@ body {
 }
 
 google-map {
-  position: static;
+  height: 600px;
 }
 
 .mapinfo {
