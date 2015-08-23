@@ -8,7 +8,7 @@
     }
 
     .statistics_table {
-      margin: 10px;
+      margin: 15px;
     }
 
     .statistics_caption {
@@ -98,13 +98,13 @@
 
       translate: function (range) {
         var translatedRange;
-        if (range == 'today') {
+        if (range === 'today') {
           translatedRange = 'heute';
-        } else if (range == 'yesterday') {
+        } else if (range === 'yesterday') {
           translatedRange = 'gestern';
-        } else if (range == 'last7days') {
+        } else if (range === 'last7days') {
           translatedRange = '7 Tage';
-        } else if (range == 'last30days') {
+        } else if (range === 'last30days') {
           translatedRange = '30 Tage';
         }
         return translatedRange;
