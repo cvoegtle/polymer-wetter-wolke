@@ -1,0 +1,117 @@
+<dom-module id="wetter-statistics">
+  <style>
+    :host {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+    }
+
+    .statistics_table {
+      margin: 10px;
+    }
+
+    .statistics_caption {
+      padding-left: 30px;
+    }
+
+    .statistics_value {
+      text-align: right;
+      padding-left: 5px;
+    }
+
+    .caption {
+      font-weight: bold;
+    }
+
+  </style>
+  <template>
+    <iron-ajax
+      auto
+      url="[[url(id)]]"
+      handle-as="json"
+      last-response="{{statistics}}"
+      debounce-duration="300">
+    </iron-ajax>
+    <template is="dom-repeat" items="[[statistics]]">
+      <paper-material elevation="1">
+        <table class="statistics_table">
+          <tr class="caption paper-font-body2">
+            <td></td>
+            <td class="statistics_caption">Regen</td>
+            <td class="statistics_caption">Tmin</td>
+            <td class="statistics_caption">Tmax</td>
+            <td class="statistics_caption">[[kwhCaption]]</td>
+          </tr>
+          <template is="dom-repeat" items="[[item.stats]]">
+            <template is="dom-if" if="[[translate(item.range)]]">
+              <tr class="paper-font-body2 statistics_value">
+                <td class="caption paper-font-body2">[[translate(item.range)]]</td>
+                <td>[[format(item.rain, 'l')]]</td>
+                <td>[[format(item.minTemperature, '°C')]]</td>
+                <td>[[format(item.maxTemperature, '°C')]]</td>
+                <td>[[formatKwh(item.kwh)]]</td>
+              </tr>
+            </template>
+          </template>
+        </table>
+      </paper-material>
+    </template>
+
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'wetter-statistics',
+
+      properties: {
+        id: String,
+        statistics: Object,
+        kwhCaption: {
+          type: String,
+          value: ''
+        }
+      },
+
+      url: function (id) {
+        return 'http://wettercentral.appspot.com/weatherstation/read?locations=' + id + '&type=stats';
+      },
+
+      format: function (value, unit) {
+        if (value !== '') {
+          var result = value.toFixed(1);
+          return result.replace('.', ',') + ' ' + unit;
+
+        } else {
+          return '';
+        }
+      },
+
+      formatKwh: function (val) {
+        if (val !== undefined && val !== '') {
+          this.kwhCaption = 'Ertrag';
+          return this.format(val, 'kWh');
+        }
+        return '';
+      },
+
+      translate: function (range) {
+        var translatedRange;
+        if (range == 'today') {
+          translatedRange = 'heute';
+        } else if (range == 'yesterday') {
+          translatedRange = 'gestern';
+        } else if (range == 'last7days') {
+          translatedRange = '7 Tage';
+        } else if (range == 'last30days') {
+          translatedRange = '30 Tage';
+        }
+        return translatedRange;
+      }
+
+
+    });
+  })();
+</script>
+

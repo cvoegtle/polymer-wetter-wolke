@@ -7,21 +7,29 @@
 
     @media (max-width: 600px) {
     }
+    .expand {
+      float: right;
+    }
+
   </style>
   <template>
-    <wetter-caption location="[[weatherdata.location]]"
-                    timestamp="[[timeFraction(weatherdata.timestamp)]]" expanded="false"></wetter-caption>
-    <wetter-line label="Temperatur:" data="[[format(weatherdata.temperature,'°C')]]"></wetter-line>
-    <wetter-line label="Luftfeuchtigkeit:" data="[[format(weatherdata.humidity, '%')]]"></wetter-line>
-    <template is="dom-if" if="[[weatherdata.rain]]">
-      <wetter-line label=" Regen letzte Stunde:" data="[[format(weatherdata.rain, 'l')]]"></wetter-line>
-    </template>
-    <template is="dom-if" if="[[weatherdata.rain_today]]">
-      <wetter-line label="Regen:" data="[[format(weatherdata.rain_today, 'l')]]"></wetter-line>
-    </template>
-    <template is="dom-if" if="[[weatherdata.watt]]">
-      <wetter-line label="Solarleistung:" data="[[format(weatherdata.watt, 'W')]]"></wetter-line>
-    </template>
+      <wetter-caption location="[[weatherdata.location]]"
+                      timestamp="[[timeFraction(weatherdata.timestamp)]]" expanded="false"></wetter-caption>
+      <paper-icon-button class="expand" id="more" icon="expand-more" on-tap="toggle"></paper-icon-button>
+      <wetter-line label="Temperatur:" data="[[format(weatherdata.temperature,'°C')]]"></wetter-line>
+      <wetter-line label="Luftfeuchtigkeit:" data="[[format(weatherdata.humidity, '%')]]"></wetter-line>
+      <template is="dom-if" if="[[weatherdata.rain]]">
+        <wetter-line label=" Regen letzte Stunde:" data="[[format(weatherdata.rain, 'l')]]"></wetter-line>
+      </template>
+      <template is="dom-if" if="[[weatherdata.rain_today]]">
+        <wetter-line label="Regen:" data="[[format(weatherdata.rain_today, 'l')]]"></wetter-line>
+      </template>
+      <template is="dom-if" if="[[weatherdata.watt]]">
+        <wetter-line label="Solarleistung:" data="[[format(weatherdata.watt, 'W')]]"></wetter-line>
+      </template>
+      <template is="dom-if" if="{{showMore}}">
+        <wetter-statistics id="[[weatherdata.id]]"></wetter-statistics>
+      </template>
   </template>
 </dom-module>
 <script>
@@ -30,7 +38,11 @@
       is: 'wetter-location',
 
       properties: {
-        weatherdata: Object
+        weatherdata: Object,
+        showMore: {
+          type: Boolean,
+          value: false
+        }
       },
 
       format: function (value, unit) {
@@ -54,6 +66,10 @@
         var minutes = date.getMinutes();
 
         return hours + ':' + (minutes < 10 ? '0' + minutes : minutes);
+      },
+
+      toggle: function() {
+        this.showMore = !this.showMore;
       }
 
     });

@@ -8,16 +8,11 @@
       font-size: 10pt;
     }
 
-    .expand {
-      float: right;
-    }
   </style>
   <template>
     <h2 class="caption">
       <span>[[location]]</span>
       <span class="timestamp">[[timestamp]]</span>
-      <paper-icon-button class="expand" id="expand" hidden="[[not(expanded)]]" icon="expand-more" on-tap="toggle"></paper-icon-button>
-      <paper-icon-button class="expand" id="collapse" hidden="[[expanded]]" icon="expand-less" on-tap="toggle"></paper-icon-button>
     </h2>
   </template>
 </dom-module>
@@ -28,18 +23,8 @@
 
       properties: {
         location: String,
-        timestamp: String,
-        expanded: Boolean
-      },
-
-      toggle: function() {
-        this.expanded = !this.expanded;
-      },
-
-      not: function(value) {
-        return !value;
+        timestamp: String
       }
-
     });
   })();
 </script>
