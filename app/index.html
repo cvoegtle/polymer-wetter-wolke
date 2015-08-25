@@ -75,6 +75,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <iron-icon icon="home"></iron-icon>
           <span>Wetter</span>
         </a>
+        <a data-route="diagrams">
+          <iron-icon icon="trending-up"></iron-icon>
+          <span>Diagramme</span>
+        </a>
         <a data-route="map">
           <iron-icon icon="maps:map"></iron-icon>
           <span>Karte</span>
@@ -127,6 +131,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <wetter-location weatherdata="[[item]]"></wetter-location>
               </paper-material>
             </template>
+          </section>
+          <section data-route="diagrams">
+            <paper-material elevation="1">
+              <img style="width: 100%; " src="https://docs.google.com/spreadsheets/d/1eWZ9CoA004HtqDuZWaoeUrhytwkmzCZ9pRlxxw_2gO8/pubchart?oid=291472484&format=image"></img>
+            </paper-material>
+            <paper-material elevation="1">
+              <img style="width: 100%; " src="https://docs.google.com/spreadsheets/d/1eWZ9CoA004HtqDuZWaoeUrhytwkmzCZ9pRlxxw_2gO8/pubchart?oid=2099860984&format=image">
+            </paper-material>
+            <paper-material elevation="1">
+              <img style="width: 100%;"  src="https://docs.google.com/spreadsheets/d/1ahkm9SDTqjYcsLgKIH5yjmqlAh6dKxgfIrZA5Dt9L3o/pubchart?oid=308371431&format=image">
+            </paper-material>
+            <paper-material elevation="1">
+              <img style="width: 100%;"  src="https://docs.google.com/spreadsheets/d/1-lqG13AsfYbCKnqtwWN46E4ghPtnlCZqLtYR1AYDm5o/pubchart?oid=26&format=image">
+            </paper-material>
           </section>
           <section data-route="map">
             <google-map latitude="50.769753" longitude="8.103826" zoom="6">
