@@ -9,6 +9,7 @@
     }
     .expand {
       float: right;
+      top: -60px;
     }
 
   </style>
@@ -28,7 +29,7 @@
         <wetter-line label="Solarleistung:" data="[[format(weatherdata.watt, 'W')]]"></wetter-line>
       </template>
       <template is="dom-if" if="{{showMore}}">
-        <wetter-statistics id="[[weatherdata.id]]"></wetter-statistics>
+        <wetter-statistics id="[[weatherdata.id]]" time="[[showMoreTime]]"></wetter-statistics>
       </template>
   </template>
 </dom-module>
@@ -42,7 +43,8 @@
         showMore: {
           type: Boolean,
           value: false
-        }
+        },
+        showMoreTime: Number
       },
 
       format: function (value, unit) {
@@ -70,6 +72,9 @@
 
       toggle: function() {
         this.showMore = !this.showMore;
+        if (this.showMore) {
+          this.showMoreTime = new Date().getTime();
+        }
       }
 
     });

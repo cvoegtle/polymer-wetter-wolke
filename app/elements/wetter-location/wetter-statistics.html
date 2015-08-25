@@ -12,7 +12,13 @@
     }
 
     .statistics_caption {
-      padding-left: 30px;
+      width: 55px;
+      text-align: right;
+    }
+
+    .statistics_caption2 {
+      width: 70px;
+      text-align: right;
     }
 
     .statistics_value {
@@ -28,7 +34,7 @@
   <template>
     <iron-ajax
       auto
-      url="[[url(id)]]"
+      url="[[url(id, time)]]"
       handle-as="json"
       last-response="{{statistics}}"
       debounce-duration="300">
@@ -41,16 +47,16 @@
             <td class="statistics_caption">Regen</td>
             <td class="statistics_caption">Tmin</td>
             <td class="statistics_caption">Tmax</td>
-            <td class="statistics_caption">[[kwhCaption]]</td>
+            <td class="statistics_caption2">[[kwhCaption]]</td>
           </tr>
           <template is="dom-repeat" items="[[item.stats]]">
             <template is="dom-if" if="[[translate(item.range)]]">
-              <tr class="paper-font-body2 statistics_value">
-                <td class="caption paper-font-body2">[[translate(item.range)]]</td>
-                <td>[[format(item.rain, 'l')]]</td>
-                <td>[[format(item.minTemperature, '°C')]]</td>
-                <td>[[format(item.maxTemperature, '°C')]]</td>
-                <td>[[formatKwh(item.kwh)]]</td>
+              <tr class="paper-font-body2">
+                <td class="caption">[[translate(item.range)]]</td>
+                <td class="statistics_value">[[format(item.rain, 'l')]]</td>
+                <td class="statistics_value">[[format(item.minTemperature, '°C')]]</td>
+                <td class="statistics_value">[[format(item.maxTemperature, '°C')]]</td>
+                <td class="statistics_value">[[formatKwh(item.kwh)]]</td>
               </tr>
             </template>
           </template>
@@ -67,6 +73,7 @@
 
       properties: {
         id: String,
+        time: Number,
         statistics: Object,
         kwhCaption: {
           type: String,
@@ -74,8 +81,8 @@
         }
       },
 
-      url: function (id) {
-        return 'http://wettercentral.appspot.com/weatherstation/read?locations=' + id + '&type=stats';
+      url: function (id, time) {
+        return 'http://wettercentral.appspot.com/weatherstation/read?locations=' + id + '&type=stats&' + time;
       },
 
       format: function (value, unit) {
