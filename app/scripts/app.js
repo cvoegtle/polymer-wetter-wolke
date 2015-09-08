@@ -93,7 +93,7 @@
         {
           id: 'forstweg17',
           location: 'Bonn',
-          visible: false,
+          visible: true,
           images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=529970705&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=2014590801&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1706278998&format=image']
@@ -127,6 +127,12 @@
 
   app.buildUrl = function () {
     var url = 'https://wettercentral.appspot.com/weatherstation/read?utf8&ext&locations=';
+
+    // Workaround für IE11
+    if (app.settings == undefined) {
+      app.initializeSettings();
+    }
+
     var stations = app.settings.weatherstations;
     var first = true;
     for (var i in stations) {
