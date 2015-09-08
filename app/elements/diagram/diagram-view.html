@@ -1,0 +1,72 @@
+<dom-module id="diagram-view">
+  <style>
+    :host {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+    }
+
+    .card {
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+  </style>
+  <template>
+    <paper-material elevation="1" class="card">
+      <paper-dropdown-menu label="Diagramme für">
+        <paper-menu class="dropdown-content" selected="{{selectedIndex}}">
+          <paper-item>Alle Stationen</paper-item>
+          <template is="dom-repeat" items="[[weatherstations]]">
+            <template is="dom-if" if="[[item.visible]]">
+              <paper-item>[[item.location]]</paper-item>
+            </template>
+          </template>
+        </paper-menu>
+      </paper-dropdown-menu>
+    </paper-material>
+
+    <template is="dom-repeat" items="[[imageUrls(selectedIndex)]]">
+      <paper-material elevation="1" class="card">
+        <img style="width: 100%; " src="[[item]]"/>
+      </paper-material>
+    </template>
+
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'diagram-view',
+      properties: {
+        weatherstations: Object,
+        selectedIndex: Number
+      },
+
+      imageUrls: function (index) {
+        if (index === undefined) {
+          return [];
+        }
+        index--;
+        if (index < 0) {
+          return ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=291472484&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=2099860984&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?oid=26&zx=3goxceuvpnz7',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=308371431&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=738029596&format=image'];
+        }
+        var visibleCount = 0;
+        for (var i = 0; i < this.weatherstations.length; i++) {
+          if (this.weatherstations[i].visible) {
+            visibleCount++;
+          }
+          if (visibleCount > index) {
+            return this.weatherstations[i].images;
+          }
+        }
+        return [];
+      }
+    });
+  })();
+</script>
+

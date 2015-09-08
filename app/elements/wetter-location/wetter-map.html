@@ -1,0 +1,25 @@
+<dom-module id="wetter-map">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+      <google-map latitude="50.769753" longitude="8.103826" zoom="6">
+        <google-map-marker latitude="51.7238851" longitude="8.7589337"><object data="https://tegelwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+        <google-map-marker latitude="51.775263" longitude="8.810188"><object data="https://baliwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+        <google-map-marker latitude="52.014573" longitude="8.695692"><object data="https://leo-wetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+        <google-map-marker latitude="50.6537912" longitude="7.1126256"><object data="https://forstwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+        <google-map-marker latitude="48.023870" longitude="7.862207"><object data="https://oxenwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+        <google-map-marker latitude="49.5692083" longitude="10.8833075"><object data="https://herzowetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
+      </google-map>
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'wetter-map',
+    });
+  })();
+</script>
+

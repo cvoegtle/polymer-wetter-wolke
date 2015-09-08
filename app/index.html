@@ -8,8 +8,6 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
-<!doctype html>
 <html lang="">
 
 <head>
@@ -59,6 +57,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body unresolved class="fullbleed layout vertical">
 <span id="browser-sync-binding"></span>
 <template is="dom-bind" id="app">
+  <iron-localstorage name="setting-store-0.7"
+                     value="{{settings}}"
+                     on-iron-localstorage-load-empty="initializeSettings">
+  </iron-localstorage>
 
   <paper-drawer-panel id="paperDrawerPanel">
     <!-- Drawer Scroll Header Panel -->
@@ -76,7 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <span>Wetter</span>
         </a>
         <a data-route="diagrams">
-          <iron-icon icon="trending-up"></iron-icon>
+          <iron-icon icon="editor:insert-photo"></iron-icon>
           <span>Diagramme</span>
         </a>
         <a data-route="map">
@@ -133,37 +135,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </template>
           </section>
           <section data-route="diagrams">
-            <paper-material elevation="1">
-              <img style="width: 100%; " src="https://docs.google.com/spreadsheets/d/1eWZ9CoA004HtqDuZWaoeUrhytwkmzCZ9pRlxxw_2gO8/pubchart?oid=291472484&format=image"></img>
-            </paper-material>
-            <paper-material elevation="1">
-              <img style="width: 100%; " src="https://docs.google.com/spreadsheets/d/1eWZ9CoA004HtqDuZWaoeUrhytwkmzCZ9pRlxxw_2gO8/pubchart?oid=2099860984&format=image">
-            </paper-material>
-            <paper-material elevation="1">
-              <img style="width: 100%;"  src="https://docs.google.com/spreadsheets/d/1ahkm9SDTqjYcsLgKIH5yjmqlAh6dKxgfIrZA5Dt9L3o/pubchart?oid=308371431&format=image">
-            </paper-material>
-            <paper-material elevation="1">
-              <img style="width: 100%;"  src="https://docs.google.com/spreadsheets/d/1-lqG13AsfYbCKnqtwWN46E4ghPtnlCZqLtYR1AYDm5o/pubchart?oid=26&format=image">
-            </paper-material>
+            <diagram-view weatherstations="[[settings.weatherstations]]"></diagram-view>
           </section>
           <section data-route="map">
-            <google-map latitude="50.769753" longitude="8.103826" zoom="6">
-              <google-map-marker latitude="51.7238851" longitude="8.7589337"><object data="https://tegelwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
-              <google-map-marker latitude="51.775263" longitude="8.810188"><object data="https://baliwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
-              <google-map-marker latitude="52.014573" longitude="8.695692"><object data="https://leo-wetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
-              <google-map-marker latitude="50.6537912" longitude="7.1126256"><object data="https://forstwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
-              <google-map-marker latitude="48.023870" longitude="7.862207"><object data="https://oxenwetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
-              <google-map-marker latitude="49.5692083" longitude="10.8833075"><object data="https://herzowetter.appspot.com/map_weatherstation.html" class="mapinfo">Dein Browser kann die Wetterdaten leider nicht anzeigen.</object></google-map-marker>
-            </google-map>
+            <wetter-map/>
           </section>
           <section data-route="settings">
             <paper-material elevation="1">
               <h2 class="paper-font-display2">Einstellungen</h2>
-              <iron-localstorage name="setting-store"
-                                 value="{{settings}}"
-                                 on-iron-localstorage-load-empty="initializeSettings">
-              </iron-localstorage>
-
               <template is="dom-repeat" items="{{settings.weatherstations}}">
                 <p>
                   <paper-checkbox id="[[item.id]]" checked="{{item.visible}}">[[item.location]]</paper-checkbox>
@@ -171,7 +150,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </template>
             </paper-material>
             <paper-material elevation="1">
-              <span>Version 0.5</span>
+              <span>Version 0.7</span>
             </paper-material>
           </section>
 
@@ -179,21 +158,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
     </paper-scroll-header-panel>
   </paper-drawer-panel>
-
-  <paper-toast id="caching-complete"
-               duration="6000"
-               text="Caching complete! This app will work offline.">
-  </paper-toast>
-
-  <platinum-sw-register auto-register
-                        clients-claim
-                        skip-waiting
-                        on-service-worker-installed="displayInstalledToast">
-    <platinum-sw-cache default-cache-strategy="networkFirst"
-                       precache-file="precache.json">
-    </platinum-sw-cache>
-  </platinum-sw-register>
-
 </template>
 
 <!-- build:js scripts/app.js -->

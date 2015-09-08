@@ -67,32 +67,53 @@
         {
           id: 'tegelweg8',
           location: 'Paderborn',
-          visible: true
+          visible: true,
+          images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=426012227&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=747368525&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=2118924146&format=image']
         },
         {
           id: 'bali',
           location: 'Bad Lippspringe',
-          visible: true
+          visible: true,
+          images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=376041681&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1754363161&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1959064763&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1408859930&format=image']
         },
         {
           id: 'leoxity',
           location: 'Leopoldshöhe',
-          visible: true
+          visible: true,
+          images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1747103714&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1205500547&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=75598496&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=255192281&format=image']
         },
         {
           id: 'forstweg17',
           location: 'Bonn',
-          visible: false
+          visible: false,
+          images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=529970705&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=2014590801&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1706278998&format=image']
         },
         {
           id: 'ochsengasse',
           location: 'Freiburg',
-          visible: true
+          visible: true,
+          images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=145042526&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1045869484&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=1963429675&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1557105940&format=image']
         },
         {
           id: 'herzo',
           location: 'Herzogenaurach',
-          visible: true
+          visible: true,
+          images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1655654633&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1843697553&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1089204796&format=image']
         }
       ]
     };
@@ -105,7 +126,7 @@
   };
 
   app.buildUrl = function () {
-    var url = 'http://wettercentral.appspot.com/weatherstation/read?utf8&ext&locations=';
+    var url = 'https://wettercentral.appspot.com/weatherstation/read?utf8&ext&locations=';
     var stations = app.settings.weatherstations;
     var first = true;
     for (var i in stations) {
