@@ -29,7 +29,7 @@
         <wetter-line label="Solarleistung:" data="[[format(weatherdata.watt, 'W')]]"></wetter-line>
       </template>
       <template is="dom-if" if="{{showMore}}">
-        <wetter-statistics id="[[weatherdata.id]]" time="[[showMoreTime]]"></wetter-statistics>
+        <wetter-statistics-panel id="[[weatherdata.id]]" time="[[showMoreTime]]"></wetter-statistics-panel>
       </template>
   </template>
 </dom-module>

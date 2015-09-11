@@ -59,7 +59,7 @@
         var visibleCount = 0;
         for (var i = 0; i < this.weatherstations.length; i++) {
           if (this.weatherstations[i].visible) {
-            if (visibleCount == index) {
+            if (visibleCount === index) {
               return this.weatherstations[i].images;
             }
             visibleCount++;

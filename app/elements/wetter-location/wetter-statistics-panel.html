@@ -1,0 +1,50 @@
+<dom-module id="wetter-statistics-panel">
+  <style>
+    :host {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+    }
+
+  </style>
+  <template>
+    <iron-ajax
+      auto
+      url="[[url(id, time)]]"
+      handle-as="json"
+      last-response="{{statistics}}"/>
+    <template is="dom-repeat" items="[[statistics]]">
+      <wetter-statistics statistic="[[item]]"/>
+    </template>
+
+  </template>
+</dom-module>
+<script>
+  (function () {
+    Polymer({
+      is: 'wetter-statistics-panel',
+
+      properties: {
+        id: String,
+        time: Number
+      },
+
+      url: function (id, time) {
+        return 'https://wettercentral.appspot.com/weatherstation/read?utf8&locations=' + id + '&type=stats&' + time;
+      },
+
+      format: function (value, unit) {
+        if (value !== '') {
+          var result = value.toFixed(1);
+          return result.replace('.', ',') + ' ' + unit;
+
+        } else {
+          return '';
+        }
+      }
+
+    });
+  })();
+</script>
+

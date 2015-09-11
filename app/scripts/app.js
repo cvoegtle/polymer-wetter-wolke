@@ -129,8 +129,8 @@
     var url = 'https://wettercentral.appspot.com/weatherstation/read?utf8&ext&locations=';
 
     // Workaround für IE11
-    if (app.settings == undefined) {
-      app.initializeSettings();
+    if (app.settings === undefined) {
+      return url+'unknown';
     }
 
     var stations = app.settings.weatherstations;
