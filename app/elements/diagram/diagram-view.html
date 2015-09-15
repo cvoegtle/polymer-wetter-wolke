@@ -16,8 +16,8 @@
   <template>
     <paper-material elevation="1" class="card">
       <paper-dropdown-menu label="Diagramme für">
-        <paper-menu class="dropdown-content" selected="{{selectedIndex}}">
-          <paper-item>Alle Stationen</paper-item>
+        <paper-menu class="dropdown-content" attr-for-selected="id" selected="{{selectedId}}">
+          <paper-item id="all">Alle Stationen</paper-item>
           <template is="dom-repeat" items="[[weatherstations]]">
             <template is="dom-if" if="[[item.visible]]">
               <paper-item id="[[item.id]]">[[item.location]]</paper-item>
@@ -27,7 +27,7 @@
       </paper-dropdown-menu>
     </paper-material>
 
-    <template is="dom-repeat" items="[[imageUrls(selectedIndex)]]">
+    <template is="dom-repeat" items="[[imageUrls(selectedId)]]">
       <paper-material elevation="1" class="card">
         <img style="width: 100%; " src="[[item]]"/>
       </paper-material>
@@ -41,28 +41,24 @@
       is: 'diagram-view',
       properties: {
         weatherstations: Object,
-        selectedIndex: Number
+        selectedId: String
       },
 
-      imageUrls: function (index) {
-        if (index === undefined) {
+      imageUrls: function (id) {
+        if (id === undefined) {
           return [];
         }
-        index--;
-        if (index < 0) {
+        if (id === 'all') {
           return ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=291472484&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=2099860984&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?oid=26&zx=3goxceuvpnz7',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=308371431&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=738029596&format=image'];
         }
-        var visibleCount = 0;
-        for (var i = 0; i < this.weatherstations.length; i++) {
-          if (this.weatherstations[i].visible) {
-            if (visibleCount === index) {
-              return this.weatherstations[i].images;
-            }
-            visibleCount++;
+        for (var i in this.weatherstations) {
+          var station = this.weatherstations[i];
+          if (station.id === id) {
+            return station.images;
           }
         }
         return [];
