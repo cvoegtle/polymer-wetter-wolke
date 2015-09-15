@@ -128,9 +128,9 @@
   app.buildUrl = function () {
     var url = 'https://wettercentral.appspot.com/weatherstation/read?utf8&ext&locations=';
 
-    // Workaround für IE11
+    // Workaround für Internet Explorer
     if (app.settings === undefined) {
-      return url+'unknown';
+      return url+'tegelweg8,forstweg17,ochsengasse,herzo';
     }
 
     var stations = app.settings.weatherstations;
