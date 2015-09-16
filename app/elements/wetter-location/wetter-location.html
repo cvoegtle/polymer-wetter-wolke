@@ -7,30 +7,34 @@
 
     @media (max-width: 600px) {
     }
+
     .expand {
+      margin-left: 7px;
       float: right;
       top: -60px;
     }
 
   </style>
   <template>
-      <wetter-caption location="[[weatherdata.location]]"
-                      timestamp="[[timeFraction(weatherdata.timestamp)]]" expanded="false"></wetter-caption>
-      <paper-icon-button class="expand" id="more" icon="expand-more" on-tap="toggle"></paper-icon-button>
-      <wetter-line label="Temperatur:" data="[[format(weatherdata.temperature,'°C')]]"></wetter-line>
-      <wetter-line label="Luftfeuchtigkeit:" data="[[format(weatherdata.humidity, '%')]]"></wetter-line>
-      <template is="dom-if" if="[[weatherdata.rain]]">
-        <wetter-line label=" Regen letzte Stunde:" data="[[format(weatherdata.rain, 'l')]]"></wetter-line>
-      </template>
-      <template is="dom-if" if="[[weatherdata.rain_today]]">
-        <wetter-line label="Regen:" data="[[format(weatherdata.rain_today, 'l')]]"></wetter-line>
-      </template>
-      <template is="dom-if" if="[[weatherdata.watt]]">
-        <wetter-line label="Solarleistung:" data="[[format(weatherdata.watt, 'W')]]"></wetter-line>
-      </template>
-      <template is="dom-if" if="{{showMore}}">
-        <wetter-statistics-panel id="[[weatherdata.id]]" time="[[showMoreTime]]"></wetter-statistics-panel>
-      </template>
+    <wetter-caption location="[[weatherdata.location]]"
+                    timestamp="[[timeFraction(weatherdata.timestamp)]]" expanded="false"></wetter-caption>
+    <paper-icon-button class="expand" id="more" icon="expand-more" on-tap="toggle"></paper-icon-button>
+    <paper-icon-button class="expand" id="diagrams" icon="editor:insert-photo"
+                       on-tap="gotoDiagrams"></paper-icon-button>
+    <wetter-line label="Temperatur:" data="[[format(weatherdata.temperature,'°C')]]"></wetter-line>
+    <wetter-line label="Luftfeuchtigkeit:" data="[[format(weatherdata.humidity, '%')]]"></wetter-line>
+    <template is="dom-if" if="[[weatherdata.rain]]">
+      <wetter-line label=" Regen letzte Stunde:" data="[[format(weatherdata.rain, 'l')]]"></wetter-line>
+    </template>
+    <template is="dom-if" if="[[weatherdata.rain_today]]">
+      <wetter-line label="Regen:" data="[[format(weatherdata.rain_today, 'l')]]"></wetter-line>
+    </template>
+    <template is="dom-if" if="[[weatherdata.watt]]">
+      <wetter-line label="Solarleistung:" data="[[format(weatherdata.watt, 'W')]]"></wetter-line>
+    </template>
+    <template is="dom-if" if="{{showMore}}">
+      <wetter-statistics-panel id="[[weatherdata.id]]" time="[[showMoreTime]]"></wetter-statistics-panel>
+    </template>
   </template>
 </dom-module>
 <script>
@@ -40,6 +44,14 @@
 
       properties: {
         weatherdata: Object,
+        dataRoute: {
+          type: String,
+          notify: true
+        },
+        selectedDiagram: {
+          type: String,
+          notify: true
+        },
         showMore: {
           type: Boolean,
           value: false
@@ -70,11 +82,16 @@
         return hours + ':' + (minutes < 10 ? '0' + minutes : minutes);
       },
 
-      toggle: function() {
+      toggle: function () {
         this.showMore = !this.showMore;
         if (this.showMore) {
           this.showMoreTime = new Date().getTime();
         }
+      },
+
+      gotoDiagrams: function() {
+        this.dataRoute = 'diagrams';
+        this.selectedDiagram = this.weatherdata.id;
       }
 
     });

@@ -57,7 +57,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body unresolved class="fullbleed layout vertical">
 <span id="browser-sync-binding"></span>
 <template is="dom-bind" id="app">
-  <iron-localstorage name="setting-store-1"
+  <iron-localstorage name="setting-store-2"
                      value="{{settings}}"
                      on-iron-localstorage-load-empty="initializeSettings">
   </iron-localstorage>
@@ -127,15 +127,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               last-response="{{weatherdata}}"
               debounce-duration="300">
             </iron-ajax>
-
             <template is="dom-repeat" items="[[weatherdata]]">
               <paper-material elevation="1">
-                <wetter-location weatherdata="[[item]]"></wetter-location>
+                <wetter-location weatherdata="[[item]]" data-route="{{route}}" selected-diagram="{{selectedDiagram}}"></wetter-location>
               </paper-material>
             </template>
           </section>
           <section data-route="diagrams">
-            <diagram-view weatherstations="[[settings.weatherstations]]"></diagram-view>
+            <diagram-view weatherstations="[[settings.weatherstations]]" selected-id="{{selectedDiagram}}"></diagram-view>
           </section>
           <section data-route="map">
             <wetter-map/>
@@ -158,19 +157,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
     </paper-scroll-header-panel>
   </paper-drawer-panel>
-
-  <paper-toast id="caching-complete"
-               duration="6000"
-               text="Caching complete! This app will work offline.">
-  </paper-toast>
-  <platinum-sw-register skip-waiting
-                        clients-claim
-                        reload-on-install
-                        state="{{state}}"
-                        on-service-worker-installed="displayInstalledToast">
-    <platinum-sw-cache default-cache-strategy="networkFirst"
-                       precache-file="precache.json"></platinum-sw-cache>
-  </platinum-sw-register>
 
 </template>
 

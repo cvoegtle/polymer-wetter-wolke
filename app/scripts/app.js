@@ -61,6 +61,43 @@
     }
   };
 
+
+  app.goHome = function () {
+    app.route = 'home';
+    app.doRefresh();
+  };
+
+  app.goDiagrams = function () {
+    app.route = 'diagrams';
+  };
+
+  app.doRefresh = function () {
+    app.weatherurl = app.buildUrl();
+  };
+
+  app.buildUrl = function () {
+    var url = 'https://wettercentral.appspot.com/weatherstation/read?utf8&ext&locations=';
+
+    // Workaround für Internet Explorer
+    if (app.settings === undefined) {
+      return url+'tegelweg8,forstweg17,ochsengasse,herzo';
+    }
+
+    var stations = app.settings.weatherstations;
+    var first = true;
+    for (var i in stations) {
+      if (stations[i].visible) {
+        if (!first) {
+          url += ',';
+        }
+        first = false;
+        url += stations[i].id;
+      }
+    }
+    url += '&' + new Date();
+    return url;
+  };
+
   app.initializeSettings = function () {
     app.settings = {
       weatherstations: [
@@ -77,18 +114,18 @@
           location: 'Bad Lippspringe',
           visible: true,
           images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=376041681&format=image',
-            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1754363161&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1959064763&format=image',
-            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1408859930&format=image']
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1408859930&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1754363161&format=image']
         },
         {
           id: 'leoxity',
           location: 'Leopoldshöhe',
           visible: true,
-          images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1747103714&format=image',
-            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1205500547&format=image',
+          images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1205500547&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=75598496&format=image',
-            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=255192281&format=image']
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=255192281&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1747103714&format=image']
         },
         {
           id: 'forstweg17',
@@ -117,39 +154,6 @@
         }
       ]
     };
-  };
-
-
-  app.goHome = function () {
-    app.route = 'home';
-    app.doRefresh();
-  };
-
-  app.buildUrl = function () {
-    var url = 'https://wettercentral.appspot.com/weatherstation/read?utf8&ext&locations=';
-
-    // Workaround für Internet Explorer
-    if (app.settings === undefined) {
-      return url+'tegelweg8,forstweg17,ochsengasse,herzo';
-    }
-
-    var stations = app.settings.weatherstations;
-    var first = true;
-    for (var i in stations) {
-      if (stations[i].visible) {
-        if (!first) {
-          url += ',';
-        }
-        first = false;
-        url += stations[i].id;
-      }
-    }
-    url += '&' + new Date();
-    return url;
-  };
-
-  app.doRefresh = function () {
-    app.weatherurl = app.buildUrl();
   };
 
 })
