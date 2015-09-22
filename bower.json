@@ -1,5 +1,5 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "polymer-wetter-wolke",
   "private": true,
   "dependencies": {
     "google-map": "GoogleWebComponents/google-map#~1.0.5",
