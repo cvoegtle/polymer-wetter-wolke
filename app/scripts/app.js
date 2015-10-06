@@ -106,6 +106,7 @@
           location: 'Paderborn',
           visible: true,
           images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=426012227&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=183626445&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=2118924146&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=747368525&format=image']
         },
@@ -132,6 +133,7 @@
           location: 'Bonn',
           visible: true,
           images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=529970705&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=1771661938&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1706278998&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=2014590801&format=image']
         },
@@ -157,6 +159,7 @@
           visible: true,
           images: ['https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=145042526&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1045869484&format=image',
+            'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=1650739963&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=2&oid=1557105940&format=image',
             'https://wetterimages.appspot.com/weatherstation/image?sheet=1&oid=1963429675&format=image']
         }
